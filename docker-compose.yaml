@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  server:
+    image: solomihir/hungergames-server
+    ports:
+      - 3000:3000
+    networks:
+      - net1
+    volumes:
+      - ./server:/server
+      - /server/node_modules
+    command: 
+      - nodemon
+      - -L
+      - index.ts
+  client:
+    image: solomihir/hungergames-client
+    ports:
+      - 3010:3010
+    networks:
+      - net1
+    volumes:
+      - ./client:/client
+      - /client/node_modules
+networks:
+  net1:
+    driver: bridge
